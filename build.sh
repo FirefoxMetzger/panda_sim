@@ -1,12 +1,17 @@
 #!/bin/bash
 
 mkdir -p ${PWD}/tmp
+rm -r ${PWD}/tmp/*
 
-cp -r ${PWD}/assets/panda ${PWD}/tmp
+# build Panda .sdf with Gripper attached
+cp -r ${PWD}/assets/panda_arm_hand ${PWD}/tmp
+docker run -v ${PWD}/assets/franka_description:/xacro osrf/ros:kinetic-desktop-full rosrun xacro xacro --inorder /xacro/robots/panda_arm_hand.urdf.xacro > ${PWD}/tmp/panda_hand_arm.urdf
+docker run -v ${PWD}/tmp:/urdf gazebo gz sdf -p /urdf/panda_hand_arm.urdf > ${PWD}/tmp/panda_arm_hand/model.sdf
 
-docker run -v ${PWD}/assets/franka_description:/xacro osrf/ros:kinetic-desktop-full rosrun xacro xacro --inorder /xacro/robots/panda_arm_hand.urdf.xacro > ${PWD}/tmp/panda.urdf
-docker run -v ${PWD}/tmp:/urdf gazebo gz sdf -p /urdf/panda.urdf > ${PWD}/panda/model.sdf
+# build Panda .sdf with Gripper attached
+cp -r ${PWD}/assets/panda_arm ${PWD}/tmp
+docker run -v ${PWD}/assets/franka_description:/xacro osrf/ros:kinetic-desktop-full rosrun xacro xacro --inorder /xacro/robots/panda_arm.urdf.xacro > ${PWD}/tmp/panda_arm.urdf
+docker run -v ${PWD}/tmp:/urdf gazebo gz sdf -p /urdf/panda_arm.urdf > ${PWD}/tmp/panda_arm/model.sdf
 
+# Build the image
 docker build -t panda_sim:latest ${PWD}
-
-rm -r ${PWD}/tmp
