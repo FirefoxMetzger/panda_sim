@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p ${PWD}/tmp
-rm -r ${PWD}/tmp/*
+rm -r ${PWD}/tmp/ && mkdir -p ${PWD}/tmp
 
 # build Panda .sdf with Gripper attached
 cp -r ${PWD}/assets/panda_arm_hand ${PWD}/tmp
