@@ -1,6 +1,9 @@
 # Franka Emika Panda Simulator
 
-This is a Gazebo based docker image that has a model of the Franka Emika Panda robot pre-installed.
+This is a Gazebo based docker image that has a model of the Franka Emika Panda robot 
+pre-installed. The original .xacro files were taken from the official Framka Emika
+[ros package repo](https://github.com/frankaemika/franka_ros) and are also published
+under Apache 2.0.
 
 ## Installation
 Installation should be fairly straight forward:
