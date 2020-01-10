@@ -3,7 +3,7 @@
   <xacro:include filename="panda_arm.xacro" />
   <xacro:include filename="panda.gazebo.xacro" />
   <xacro:include filename="panda.transmission.xacro" />
-  <xacro:panda_arm />
+  <xacro:panda_arm description_pkg="panda_arm" />
 
   <xacro:panda_gazebo robot_name="panda" />
   <xacro:panda_transmission robot_name="panda" />
